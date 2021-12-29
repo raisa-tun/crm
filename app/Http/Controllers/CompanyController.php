@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Models\Company;
+use Image;
 
 class CompanyController extends Controller
 {
@@ -14,7 +17,7 @@ class CompanyController extends Controller
     public function index()
     {
 
-        return view("admin.contents.admin");
+        return view("admin.contents.company.all");
     }
 
     /**
@@ -24,7 +27,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        return view("admin.contents.form");
+        return view("admin.contents.company.form");
     }
 
     /**
@@ -33,9 +36,12 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request, Company $company)
     {
-        //
+        //dd($request);
+        $company = $company->create($request->all());
+       
+        return redirect()->route('company.edit', ['company' => $company])->with('message', 'Company create successfully.');
     }
 
     /**
@@ -55,9 +61,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Company $company)
     {
-        //
+        return view("admin.contents.company.form",compact('company'));
     }
 
     /**

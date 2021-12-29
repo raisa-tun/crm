@@ -21,5 +21,5 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::resource('admin',CompanyController::class);
+Route::resource('company',CompanyController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
