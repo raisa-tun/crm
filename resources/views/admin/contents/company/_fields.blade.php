@@ -50,13 +50,17 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Logo</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" name="logo">
+                        <input type="file" class="form-control" name="company_logo">
+                        
+                        <input type="hidden" class="form-control" name="old_logo" value = "{{ isset($company->logo) ? $company->logo : old('logo') }}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">File</label>
                     <div class="col-sm-10">
-                        <input type="file" class="form-control" name="file">
+                        <input type="file" class="form-control" name="company_file" >
+                        <input type="hidden" class="form-control" name="old_file" value = "{{isset($company->file->file_attachment) ? $company->file->file_attachment : old('file_attachment')}}">
+                        
                     </div>
                 </div>
                 <div class="form-group row">

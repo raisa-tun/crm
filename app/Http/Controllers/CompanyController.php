@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
-use Image;
+use App\Models\File;
+
 
 class CompanyController extends Controller
 {
@@ -16,8 +18,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-
-        return view("admin.contents.company.all");
+        $companies = Company::paginate(3);
+        return view("admin.contents.company.all", compact('companies'));
     }
 
     /**
@@ -39,8 +41,26 @@ class CompanyController extends Controller
     public function store(StoreCompanyRequest $request, Company $company)
     {
         //dd($request);
-        $company = $company->create($request->all());
-       
+
+        $company = $company->create([
+
+            'company_name' => $request->company_name,
+            'address' => $request->address,
+            'phone_no' => $request->phone_no,
+            'summery' => $request->summery,
+            'email' => $request->email,
+            'logo' => $request->logo
+        ]);
+        //dd($company->id);
+        if ($request->hasFile('company_file')) {
+
+            $file = new File();
+            $file->company_id = $company->id;
+            $file->file_attachment = $request->file;
+            $file->save();
+        }
+
+
         return redirect()->route('company.edit', ['company' => $company])->with('message', 'Company create successfully.');
     }
 
@@ -63,7 +83,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        return view("admin.contents.company.form",compact('company'));
+        return view("admin.contents.company.form", compact('company'));
     }
 
     /**
@@ -73,9 +93,17 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        if ($request->hasFile('company_file')) {
+            $file = File::where('company_id', $company->id)->update([
+
+                'file_attachment' => $request->file
+
+            ]);
+        }
+        $company->update($request->except(['_method', '_token','file']));
+        return redirect()->route('company.edit', ['company' => $company])->with('message', 'Company create successfully.');
     }
 
     /**
@@ -87,5 +115,15 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function delete(Request $request)
+    {
+
+        //dd($request);
+        $company_id = $request->input('company_id');
+        $company = Company::find($company_id);
+        $company->delete();
+
+        return redirect()->route('company.index')->with('message', "Deleted Successfully!");
     }
 }

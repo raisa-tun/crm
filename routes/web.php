@@ -22,4 +22,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('company',CompanyController::class);
+Route::delete('delete',[CompanyController::class,'delete'])->name('company.delete');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -4,8 +4,8 @@
 <div class="card">
     <div class="card-header">
         <h3>Company Management</h3>
-        
-        <button type="button" class="btn btn-success" data-container="body" data-toggle="popover" title="Success color states" style = "float:right">
+
+        <button type="button" class="btn btn-success" data-container="body" data-toggle="popover" title="Success color states" style="float:right">
             <a href="{{route('company.create')}}">Add</a>
         </button>
 
@@ -14,169 +14,90 @@
         <table id="demo-foo-filtering" class="table table-striped">
             <thead>
                 <tr>
-                    <th>First Name</th>
-                    <th data-breakpoints="xs">Last Name</th>
-                    <th data-breakpoints="xs">Job Title</th>
-                    <th data-breakpoints="xs">BOB</th>
-                    <th>Status</th>
+
+                    <th data-breakpoints="xs">Comapany Name</th>
+                    <th data-breakpoints="xs">Address</th>
+                    <th data-breakpoints="xs">Phone number</th>
+                    <th data-breakpoints="xs">Email</th>
+                    <th data-breakpoints="xs">Summery</th>
+                    <th data-breakpoints="xs">Logo</th>
+                    <th data-breakpoints="xs">Documents</th>
+                    <th data-breakpoints="xs">Action</th>
+
                 </tr>
             </thead>
             <tbody>
+                @foreach($companies as $company)
                 <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td><span class="tag tag-danger"> Suspended</span>
+                    <td>{{$company->company_name}}</td>
+                    <td>{{$company->address}}</td>
+                    <td>{{$company->phone_no}}</td>
+                    <td>{{$company->email}}</td>
+                    <td>{{$company->summery}}</td>
+                    <td><img src="{{ url('storage/'.$company->logo) }}" width="60" height="60" class="rounded-circle mr-2" /></td>
+
+                    <td>
+                        @foreach($company->file as $company_file)
+                        <a href="{{ url('storage/'.$company_file->file_attachment) }}" width="60" height="60">Doc file</a>
+                        @endforeach
+                    </td>
+
+
+                    <td class="text-center">
+                        <a href="{{route('company.edit',['company' => $company->id])}}">
+                            <span class="icofont icofont-ui-edit">
+                        </a>
+                        <button type="button" class="btn btnDelete text-danger" data-id="{{ $company->id }}"><span class="icofont icofont-ui-delete"></i>
+                        </button>
                     </td>
                 </tr>
-                <tr>
-                    <td>Garrett</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td><span class="tag tag-danger"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cox</td>
-                    <td>Author</td>
-                    <td>San</td>
-                    <td>66</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kelly</td>
-                    <td>Brielle</td>
-                    <td>Edinburgh</td>
-                    <td>22</td>
-                    <td><span class="tag tag-success">Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Airi Satou</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>33</td>
-                    <td><span class="tag tag-success"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Brielle</td>
-                    <td>Specialist</td>
-                    <td>New York</td>
-                    <td>61</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Herrod Chandler</td>
-                    <td>Sales Assistant</td>
-                    <td>San</td>
-                    <td>59</td>
-                    <td><span class="tag tag-danger">Suspended</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Rhona Davidson</td>
-                    <td>Specialist</td>
-                    <td>Tokyo</td>
-                    <td>55</td>
-                    <td><span class="tag tag-success"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Colleen Hurst</td>
-                    <td>Javascript Developer</td>
-                    <td>San</td>
-                    <td>39</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Sonya Frost</td>
-                    <td>Software</td>
-                    <td>Edinburgh</td>
-                    <td>23</td>
-                    <td><span class="tag tag-danger">Suspended</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Jena Gaines</td>
-                    <td>Office Manager</td>
-                    <td>London</td>
-                    <td>30</td>
-                    <td><span class="tag tag-success"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Flynn</td>
-                    <td>Support Lead</td>
-                    <td>Edinburgh</td>
-                    <td>22</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Charde Marshall</td>
-                    <td>Regional Director</td>
-                    <td>San</td>
-                    <td>36</td>
-                    <td><span class="tag tag-danger">Suspended</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Haley Kennedy</td>
-                    <td>Senior Marketing Designer</td>
-                    <td>London</td>
-                    <td>43</td>
-                    <td><span class="tag tag-success"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Tatyana Fitzpatrick</td>
-                    <td>Regional Director</td>
-                    <td>London</td>
-                    <td>19</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Michael Silva</td>
-                    <td>Marketing Designer</td>
-                    <td>London</td>
-                    <td>66</td>
-                    <td><span class="tag tag-danger">Suspended</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Paul Byrd</td>
-                    <td>(CFO)</td>
-                    <td>New York</td>
-                    <td>64</td>
-                    <td><span class="tag tag-success"> Active</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Gloria Little</td>
-                    <td>Systems Administrator</td>
-                    <td>New York</td>
-                    <td>59</td>
-                    <td><span class="tag tag-default">Disabled</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Bradley Greer</td>
-                    <td>Software</td>
-                    <td>London</td>
-                    <td>41</td>
-                    <td><span class="tag tag-danger">Suspended</span>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
+
+        {{$companies->links()}}
     </div>
 </div>
+<div class="modal modal- fade" id="modal-delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to delete?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <form method="post" action="{{route('company.delete')}}">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="company_id" class="company-id">
+                    <button type="submit" class="btn btn-outline" id="modalBtnDelete">Delete</button>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+@endsection
+
+@section('script')
+<script>
+    $(function() {
+        let selectedId;
+        $('.btnDelete').click(function() {
+            $('#modal-delete').modal('show');
+            selectedId = $(this).data('id');
+            $('.company-id').val(selectedId);
+        });
+
+    })
+</script>
 
 @endsection
