@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\http\Controllers\CompanyController;
+use App\http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,5 @@ Auth::routes();
 
 Route::resource('company',CompanyController::class);
 Route::delete('delete',[CompanyController::class,'delete'])->name('company.delete');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

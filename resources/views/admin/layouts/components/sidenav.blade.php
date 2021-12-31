@@ -26,7 +26,7 @@
                 </a>
                 <ul class="pcoded-submenu">
                     <li class=" ">
-                        <a href="form">
+                        <a href="{{route('company.index')}}">
                             <span class="pcoded-mtext">Details</span>
                         </a>
                     </li>

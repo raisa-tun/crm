@@ -97,6 +97,7 @@
                                 <div class="page-body">
                                     @yield('employee')
                                     <div class="row">
+                                        @yield('dashboard')
                                         @yield('form')
                                     </div>
                                 </div>
