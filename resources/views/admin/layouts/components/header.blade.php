@@ -112,14 +112,14 @@
                                 </a>
                             </li>
                             <li>
-                               {{-- <form action="{{route('signout')}}" method="POST">
+                                <form action="{{route('logout')}}" method="POST">
                                     @csrf
                                     <button type="submit">
                                         <i class="feather icon-log-out"></i>
                                         Logout
                                     </button>
 
-                                </form>--}}
+                                </form>
                             </li>
                         </ul>
 
